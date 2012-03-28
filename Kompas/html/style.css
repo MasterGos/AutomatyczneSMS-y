@@ -1,0 +1,58 @@
+
+        body{
+          background-image: url(tlostrona.jpg);
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+
+        }
+
+
+        #stopnie{
+            font-size: 40px;
+            -webkit-text-fill-color: black;
+            -webkit-text-stroke-color: red;
+            -webkit-text-stroke-width: 4.85px;
+             text-align: center;
+             position: relative;
+             top: 40px;
+
+        }
+
+
+       #A{
+          font-size: 25px;
+          position: absolute;
+        }
+        #B{
+           font-size: 25px;
+           position: absolute;
+         }
+         #C{
+            font-size: 25px;
+            position: absolute;
+          }
+          #D{
+             font-size: 25px;
+             position: absolute;
+           }
+        #tarcza{
+
+            border-radius: 220px;
+            -moz-border-radius: 220px;
+            -webkit-border-radius: 220px;
+            background-color: rgba(255,255,255,0.50);;
+            width: 450;
+            hight: 450;
+            top:0px;
+            left:0px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            align: center;
+            -moz-box-shadow: rgba(0,0,0,0.3) 9px 7px 1px;
+            -webkit-box-shadow: rgba(0,0,0,0.3) 9px 7px 1px;
+            box-shadow: rgba(0,0,0,0.3) 9px 7px 1px;
+
+        }
+
+
+

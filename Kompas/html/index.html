@@ -1,17 +1,97 @@
+
 <html>
 <head>
-    <style>
-        html {
-            background-color: black;
-            color: white;
-        }
-    </style>
+    <link href="style.css" rel="stylesheet" type="text/css">
 
     <script>
+            //Funkcja "rysuj¹ca" canvas
+            function paint(value){
+
+            var img = new Image();
+
+            //Zmiena statyczna
+            if ( typeof paint.lastValue == 'undefined' ) {
+
+                    paint.lastValue = 0;
+                }
+
+
+
+              var canvas = document.getElementById('tarcza');
+              var context = canvas.getContext('2d');
+
+
+                //wieksza wersja obrazka
+                img.src = 'tarcza.png';
+               //img.src = 'tarczam.png';
+
+
+              context.translate(canvas.width / 2, canvas.height / 2);
+
+               //Obliczanie rotacji
+              context.rotate(((value-paint.lastValue)*-1)* Math.PI / 180);
+              paint.lastValue = value;
+
+              context.translate(-canvas.width / 2, -canvas.height / 2);
+
+              img.onload = function(){
+                            context.clearRect(0, 0, canvas.width, canvas.height);
+                            //Pozycjonowanie
+                            context.drawImage(img,Math.abs((img.width - canvas.width)/2),Math.abs((img.width - canvas.width)/2));
+
+               };
+
+
+        }
+
+
         function handleUpdate(value)
         {
             try {
-                document.getElementById("placeHolder").innerHTML = value;
+                var stopnie = Math.round(value);
+                var kierunek = "";
+
+                if(stopnie <= 10 || stopnie >= 350){
+                    kierunek = "N"
+
+                }
+                if(stopnie > 10 && stopnie < 80){
+                    kierunek = "NE"
+
+                }
+                if(stopnie >= 80 && stopnie <= 100){
+                    kierunek = "E"
+
+                }
+                if(stopnie > 100 && stopnie < 170){
+                    kierunek = "SE"
+
+                }
+                if(stopnie >= 170 && stopnie <= 190){
+                    kierunek = "S"
+
+                }
+                if(stopnie > 190 && stopnie < 260){
+                    kierunek = "SW"
+
+                }
+                if(stopnie >= 260 && stopnie <= 280){
+
+                    kierunek = "W"
+
+                }
+                if(stopnie > 280 && stopnie < 350){
+
+                    kierunek = "NW"
+
+                }
+
+                document.getElementById("stopnie").innerHTML =  kierunek + ' '+ stopnie+'&#176;';
+
+                //Wywo³anie fukcji rysuj¹cej
+                paint(stopnie);
+
+
             }
             catch(e) {
                 ComarchCompass.debug("[JS] handleUpdate error "+e);
@@ -19,13 +99,56 @@
         }
         window.onload = function() {
             ComarchCompass.update.connect(handleUpdate);
+
+             var canvas = document.getElementById('tarcza');
+
+
+
+
+            //Nie dzia³a
+            //var pozycjaX = document.getElementById("kompas").offsetLeft;
+            //var pozycjaY = document.getElementById("kompas").offsetTop;
+
+
+            var pozycjaX = 0;
+            var pozycjaY = 0;
+            //Pozycjonowanie stopni na tarczy
+            document.getElementById("A").style.left= ((canvas.width/2)+pozycjaX)+"px";
+            document.getElementById("A").style.top= (pozycjaY)+"px";
+
+            document.getElementById("B").style.left= (canvas.width+pozycjaX-35)+"px";
+            document.getElementById("B").style.top= ((canvas.height/2)+pozycjaY-10)+"px";
+
+            document.getElementById("C").style.left= ((canvas.width/2)+pozycjaX-10)+"px";
+            document.getElementById("C").style.top= (canvas.height+pozycjaY-30)+"px";
+
+            document.getElementById("D").style.left= (pozycjaX+10)+"px";
+            document.getElementById("D").style.top= ((canvas.height/2)+pozycjaY-10)+"px";
+
+
         }
+
+
+
+
+
     </script>
 </head>
 <body>
-    <p>
-        <h1>Hello world!</h1>
-        <div id="placeHolder">.</div>
-    </p>
+<div id="A">0&#176;</div>
+<div id="B">90&#176;</div>
+<div id="C">180&#176;</div>
+<div id="D">270&#176;</div>
+            <div id="kompas">
+                <canvas id="tarcza" width="450" height="450">
+                 <script>
+                    paint(0);
+                 </script>
+                </canvas>
+            </div>
+<div id="stopnie">N 0&#176; </div>
+
+
+
 </body>
 </html>
