@@ -14,4 +14,4 @@ Authors
 Description
 -----------
 
-DESCRIPTION: Jakis tam opis czegos tam do projektu... UWOLNIÆ BARABASZA!!!
+DESCRIPTION: Contains files for exercises and home works.
