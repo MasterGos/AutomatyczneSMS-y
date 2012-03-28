@@ -1,31 +1,86 @@
 <html>
 <head>
-    <style>
-        html {
-            background-color: black;
-            color: white;
-        }
-    </style>
+    <link href="style.css" rel="stylesheet" type="text/css">
 
     <script>
-        function handleUpdate(value)
-        {
-            try {
-                document.getElementById("placeHolder").innerHTML = value;
+            function paint(value){
+
+            var img = new Image();
+
+            if ( typeof paint.lastValue == 'undefined' ){
+                    paint.lastValue = 0;
             }
-            catch(e) {
+
+              var canvas = document.getElementById('tarcza');
+              var context = canvas.getContext('2d');
+              img.src = 'igla.png';
+
+              context.translate(canvas.width / 2, canvas.height / 2);
+
+              context.rotate((value-paint.lastValue)* Math.PI / 180);
+              paint.lastValue = value;
+
+              context.translate(-canvas.width / 2, -canvas.height / 2);
+
+              img.onload = function(){
+                            context.clearRect(0, 0, canvas.width, canvas.height);
+                            context.drawImage(img,Math.abs((img.width - canvas.width)/2),Math.abs((img.width - canvas.width)/2));
+               };
+        }
+
+        function handleUpdate(value){
+            try{
+                var stopnie = Math.round(value);
+                var kierunek = "";
+
+                if(stopnie <= 5 || stopnie >= 355){
+                    kierunek = "N"
+                }
+                if(stopnie > 5 && stopnie < 85){
+                    kierunek = "NE"
+                }
+                if(stopnie >= 85 && stopnie <= 95){
+                    kierunek = "E"
+                }
+                if(stopnie > 95 && stopnie < 175){
+                    kierunek = "SE"
+                }
+                if(stopnie >= 175 && stopnie <= 185){
+                    kierunek = "S"
+                }
+                if(stopnie > 185 && stopnie < 265){
+                    kierunek = "SW"
+                }
+                if(stopnie >= 265 && stopnie <= 275){
+                    kierunek = "W"
+                }
+                if(stopnie > 275 && stopnie < 355){
+                    kierunek = "NW"
+                }
+
+                document.getElementById("stopnie").innerHTML =  kierunek + ' '+ stopnie+'&#176;';
+
+                //Wywo³anie fukcji rysuj¹cej
+                paint(stopnie);
+            }
+            catch(e){
                 ComarchCompass.debug("[JS] handleUpdate error "+e);
             }
         }
-        window.onload = function() {
-            ComarchCompass.update.connect(handleUpdate);
+        window.onload = function(){
+            ComarchCompass.update.connect(handleUpdate);            
         }
+
     </script>
 </head>
 <body>
-    <p>
-        <h1>Hello world!</h1>
-        <div id="placeHolder">.</div>
-    </p>
+            <div id="kompas">
+                <canvas id="tarcza" width="450" height="450">
+                 <script>
+                    paint(0);
+                 </script>
+                </canvas>
+            </div>
+            <div id="stopnie">N 0&#176; </div>
 </body>
 </html>

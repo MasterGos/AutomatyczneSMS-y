@@ -26,7 +26,8 @@ SOURCES += main.cpp \
     viewloader.cpp \
     sensor.cpp
 
-OTHER_FILES += html/index.html
+OTHER_FILES += html/index.html \
+    html/style.css
 
 QT += webkit
 

@@ -26,7 +26,8 @@ int main(int argc, char *argv[])
     Sensor *sensor = new Sensor(view);
     qDebug() << QDir::currentPath();
     QFileInfo myFileInfo("html/index.html");
-    QUrl url = QUrl( "file://" + myFileInfo.absoluteFilePath());
+    qDebug() << myFileInfo.absoluteFilePath();
+    QUrl url = QUrl( myFileInfo.absoluteFilePath());
     qDebug() << url;
     view->load(url);
     view->showFullScreen();

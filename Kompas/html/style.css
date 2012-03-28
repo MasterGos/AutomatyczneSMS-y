@@ -1,0 +1,30 @@
+        body{
+          background-image: url(tlo.jpg);
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+        }
+
+
+        #stopnie{
+            font-size: 60px;
+            -webkit-text-fill-color: red;
+            -webkit-text-stroke-color: black;
+            -webkit-text-stroke-width: 6.85px;
+             text-align: center;
+             position: relative;
+             top: 60px;
+        }
+
+        #tarcza{
+            background-image: url(tarcza.png);
+            width: 450;
+            hight: 450;
+            top:0px;
+            left:0px;
+
+            background-repeat: no-repeat;
+            background-size: contain;
+            align: center;
+
+        }
+
